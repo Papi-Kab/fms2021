@@ -1,0 +1,65 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <h1>Creation de compte</h1>
+    <ion-buttons slot="start">
+      <ion-button color="primary" routerLink="/login">
+        <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="header">
+    <div class="photo-box">
+      <div class="img-box">
+        <img [src]="image">
+      </div>
+      <div class="buttons_box">
+        <div class="icon_box">
+          <ion-icon name="camera"></ion-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form id="form" [formGroup]="form">
+      <ion-item lines="none">
+        <ion-label class="bla"  position=""><ion-icon name="person-outline"></ion-icon></ion-label>
+    <ion-input class="bla" formControlName="nom" placeholder="Nom"></ion-input>
+    <small class="text-danger" *ngIf="form.controls.nom.touched">
+      <ion-text *ngIf="form.controls.nom.errors?.required" color="danger">
+        Le nom est <strong>Obligatoire</strong>
+      </ion-text>
+    </small>
+  </ion-item>
+    <ion-item lines="none">
+      <ion-label position=""><ion-icon name="call-outline"></ion-icon></ion-label>
+    <ion-input formControlName="telephone" placeholder="Téléphone"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position=""><ion-icon name="mail-outline"></ion-icon></ion-label>
+    <ion-input formControlName="email"  type="Email" placeholder="Email"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position=""><ion-icon name="home-outline"></ion-icon></ion-label>
+    <ion-input formControlName="domicile" placeholder="Domicile"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position=""><ion-icon name="school-outline"></ion-icon></ion-label>
+    <ion-input formControlName="centre" placeholder="Centre"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position=""><ion-icon name="lock-closed-outline"></ion-icon></ion-label>
+    <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
+    </ion-item>
+
+
+  </form>
+  <ion-button [disabled]="!form.valid" expand="block" (click)="save()" shape="round">Inscription</ion-button>
+
+
+  <p> En cliquant sur 'Inscription'<br/> vous accepter<br/> nos conditions et termes d'utilisation</p>
+  </ion-content>
+
