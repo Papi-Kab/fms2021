@@ -32,6 +32,9 @@ export class InscriptionPage implements OnInit {
     });
     this.subscribe();
   }
+   save(){
+    console.log(this.item);
+  }
   private subscribe(){
     this.form.get('nom').valueChanges.subscribe(value => this.item.nom = value.trim());
     this.form.get('telephone').valueChanges.subscribe(value => this.item.telephone = value.trim());
@@ -41,9 +44,7 @@ export class InscriptionPage implements OnInit {
     this.form.get('password').valueChanges.subscribe(value => this.password = value.trim());
   }
 
-  save(){
-    console.log(this.item);
-  }
+
 
 }
 export function emailValidator(control: FormControl): { [key: string]: any } {
