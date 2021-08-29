@@ -1,5 +1,7 @@
 {
   "name": "fms2",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
