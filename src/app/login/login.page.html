@@ -17,10 +17,19 @@
   <img src="assets//image/images2.jfif"/>
 </div>
 
-<form id="form">
-  <app-input placeholder="Email"></app-input>
-  <app-input type="password" placeholder="password"></app-input>
-  <ion-button id="ion-button1" expand="block" shape="round">Login</ion-button>
-  <ion-button id="ion-button2" expand="block" routerLink="/inscription" shape="round">S'inscrire</ion-button>
-</form>
+<form id="form" [formGroup]="form">
+  <ion-item lines="none">
+      <ion-label position=""><ion-icon name="mail-outline"></ion-icon></ion-label>
+    <ion-input formControlName="email"  type="Email" placeholder="Email"></ion-input>
+    </ion-item>
+
+  <ion-item lines="none">
+      <ion-label position=""><ion-icon name="lock-closed-outline"></ion-icon></ion-label>
+    <ion-input formControlName="password" type="password" placeholder="Password"></ion-input>
+    </ion-item>
+    </form>
+    <ion-button [disabled]="!form.valid" expand="block" (click)="connexion()" shape="round">Connexion</ion-button>
+    <!-- <ion-button id="ion-button2" expand="block" routerLink="/inscription" shape="round">S'inscrire</ion-button> -->
+    <span class="insc">Vous n'avez pas de compte?<strong><a routerLink="/inscription">s'inscrire</a></strong></span>
+
 </ion-content>
