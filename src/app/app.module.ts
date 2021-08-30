@@ -6,10 +6,13 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import {AngularFireModule } from '@angular/fire';
+import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { Network } from '@ionic-native/network/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 export const firebaseConfig = {
   apiKey: 'AIzaSyC7YNZW6QOK9Kq5UR_MzafSjFPQQCvZxIc',
   authDomain: 'fms2021-fd5e0.firebaseapp.com',
@@ -23,13 +26,18 @@ export const firebaseConfig = {
   entryComponents: [],
   imports: [BrowserModule,
     IonicModule.forRoot(),
+    HttpClientModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireStorageModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    Network,
+    Camera,
+    HttpClient,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
