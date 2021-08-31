@@ -12,6 +12,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { Network } from '@ionic-native/network/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
+import { IonicStorageModule } from '@ionic/storage-angular';
+
+
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 export const firebaseConfig = {
   apiKey: 'AIzaSyC7YNZW6QOK9Kq5UR_MzafSjFPQQCvZxIc',
@@ -26,6 +29,7 @@ export const firebaseConfig = {
   entryComponents: [],
   imports: [BrowserModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     HttpClientModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
@@ -37,6 +41,7 @@ export const firebaseConfig = {
     Network,
     Camera,
     HttpClient,
+    Storage,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

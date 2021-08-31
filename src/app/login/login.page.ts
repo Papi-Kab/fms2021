@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { ToastController } from '@ionic/angular';
 /* eslint-disable prefer-arrow/prefer-arrow-functions */
 /* eslint-disable no-var */
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { Network } from '@ionic-native/network/ngx';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-login',
@@ -17,12 +19,14 @@ export class LoginPage implements OnInit {
 
   item: UtilisateurLogin;
   form: FormGroup;
+  private _storage: Storage | null = null;
   constructor(
     private network: Network,
     public toastController: ToastController,
      public afAuth: AngularFireAuth,
     public fb: FormBuilder,
     public router: Router,
+    private storage: Storage,
   ) { }
 
   ngOnInit() {
@@ -41,12 +45,22 @@ export class LoginPage implements OnInit {
       this.errorConnexion();
     } else {
       this.afAuth.signInWithEmailAndPassword(this.item.email, this.item.password).then(auth => {
+        this.init();
+        this.set('userId', this.item.email);
         this.router.navigateByUrl('/home');
       }).catch(err => {
         console.log('Erreur: ' + err);
         this.errorConnex(err);
       });
     }
+  }
+  public set(key: string, value: any) {
+    this._storage?.set(key, value);
+  }
+  async init() {
+    // If using, define drivers here: await this.storage.defineDriver(/*...*/);
+    const storage = await this.storage.create();
+    this._storage = storage;
   }
 
   async errorConnexion() {

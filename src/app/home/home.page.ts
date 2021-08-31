@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,16 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  //email: string;
+  constructor(private storage: Storage,
+  private router: Router) {
+    this.init();
+  }
+   init() {
+     const id = this.storage.get('userId');
+     if (id !== null) {
+       this.router.navigateByUrl('/inscription');
+     }
+  }
 
 }
