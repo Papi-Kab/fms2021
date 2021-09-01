@@ -48,7 +48,7 @@ export class LoginPage implements OnInit {
       this.errorConnexion();
     } else {
       this.afAuth.signInWithEmailAndPassword(this.item.email, this.item.password).then(auth => {
-        this.set('userId', this.item.email);
+        this.set('userId', auth.user.uid);
         this.spinner = true;
         setTimeout(() => {
           this.spinner = false;
