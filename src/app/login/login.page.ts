@@ -9,6 +9,7 @@ import { Network } from '@ionic-native/network/ngx';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
+//import { setTimeout } from 'timers';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginPage implements OnInit {
 
   item: UtilisateurLogin;
   form: FormGroup;
+  spinner = false;
   private _storage: Storage | null = null;
   constructor(
     private network: Network,
@@ -32,6 +34,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.item = new UtilisateurLogin();
     this.buildForm();
+    this.init();
   }
   buildForm() {
     this.form = this.fb.group({
@@ -45,15 +48,28 @@ export class LoginPage implements OnInit {
       this.errorConnexion();
     } else {
       this.afAuth.signInWithEmailAndPassword(this.item.email, this.item.password).then(auth => {
-        this.init();
         this.set('userId', this.item.email);
-        this.router.navigateByUrl('/home');
+        this.spinner = true;
+        setTimeout(() => {
+          this.spinner = false;
+          this.router.navigateByUrl('/home');
+        }, 6000);
       }).catch(err => {
         console.log('Erreur: ' + err);
         this.errorConnex(err);
       });
     }
   }
+  testeStorage() {
+    this.getsto().then(ab => {
+      this.testeToast(ab);
+    });
+  }
+  async getsto() {
+    const a = await this._storage.get('userId');
+    return a;
+  }
+
   public set(key: string, value: any) {
     this._storage?.set(key, value);
   }
@@ -69,6 +85,16 @@ export class LoginPage implements OnInit {
       duration: 2000,
       position: 'bottom',
       color: 'danger',
+    });
+    toast.present();
+  }
+
+  async testeToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 10000,
+      position: 'bottom',
+      color: 'success',
     });
     toast.present();
   }

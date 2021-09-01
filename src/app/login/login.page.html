@@ -29,7 +29,8 @@
     </ion-item>
     </form>
     <ion-button [disabled]="!form.valid" expand="block" (click)="connexion()" shape="round">Connexion</ion-button>
+     <ion-button expand="block" (click)="testeStorage()" shape="round">teste storage</ion-button>
     <!-- <ion-button id="ion-button2" expand="block" routerLink="/inscription" shape="round">S'inscrire</ion-button> -->
     <span class="insc">Vous n'avez pas de compte?<strong><a routerLink="/inscription">s'inscrire</a></strong></span>
-
+    <ion-spinner color="primary" *ngIf="spinner"></ion-spinner>
 </ion-content>

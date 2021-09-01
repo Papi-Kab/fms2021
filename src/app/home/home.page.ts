@@ -16,7 +16,7 @@ export class HomePage {
   }
    init() {
      const id = this.storage.get('userId');
-     if (id !== null) {
+     if (id == null) {
        this.router.navigateByUrl('/inscription');
      }
   }
