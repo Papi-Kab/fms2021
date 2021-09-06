@@ -23,7 +23,15 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+  },  {
+    path: 'trajet-add',
+    loadChildren: () => import('./page/trajet-add/trajet-add.module').then( m => m.TrajetAddPageModule)
   },
+  {
+    path: 'profil-conf',
+    loadChildren: () => import('./page/profil-conf/profil-conf.module').then( m => m.ProfilConfPageModule)
+  },
+
 
 ];
 
