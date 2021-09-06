@@ -6,7 +6,11 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage,
-  }
+  },
+  {
+    path: 'new-trajet',
+    loadChildren: () => import('../page/trajet-add/trajet-add.module').then( m => m.TrajetAddPageModule)
+  },
 ];
 
 @NgModule({

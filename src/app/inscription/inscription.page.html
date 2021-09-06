@@ -48,7 +48,9 @@
     </ion-item>
     <ion-item lines="none">
       <ion-label position=""><ion-icon name="school-outline"></ion-icon></ion-label>
-    <ion-input formControlName="centre" placeholder="Centre"></ion-input>
+    <ion-select formControlName="centre" placeholder="Centre">
+            <ion-select-option *ngFor="let c of centres" value="{{c.nom}}">{{c.nom}}</ion-select-option>
+          </ion-select>
     </ion-item>
     <ion-item lines="none">
       <ion-label position=""><ion-icon name="lock-closed-outline"></ion-icon></ion-label>
@@ -58,8 +60,5 @@
 
   </form>
   <ion-button [disabled]="!form.valid" expand="block" (click)="save()" shape="round">Inscription</ion-button>
-
-
-  <p> En cliquant sur 'Inscription'<br/> vous accepter<br/> nos conditions et termes d'utilisation</p>
   </ion-content>
 

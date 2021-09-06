@@ -1,20 +1,58 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
+  <ion-toolbar color="primary">
+  <ion-buttons slot="secondary">
+    <ion-button>
+      <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+    </ion-button>
+    <ion-button>
+      <ion-icon slot="icon-only" name="search"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-buttons slot="primary">
+    <ion-button>
+      <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-title>Woyo-Woyo</ion-title>
+</ion-toolbar>
+
+<!-- Segment with anchors -->
+<!-- Segment with secondary color -->
+<ion-segment  [(ngModel)]="selectedTab">
+  <ion-segment-button value="mesdemandes">
+    <ion-label>Mes demandes</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="demandes">
+    <ion-label>Demandes</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="sat">
+    <ion-label>Satellite</ion-label>
+  </ion-segment-button>
+</ion-segment>
 </ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+<!--Liste des demandes-->
+<ion-content [fullscreen]="true" *ngIf="selectedTab === 'demandes'">
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <strong>Liste des demandes</strong>
+    <ion-card *ngFor="let demande of trajets">
+      <ion-item lines="none" no-padding class="demande" >
+        <div class="div-box" slot="start">
+          <img src="assets/image/user.png" (load) = "loaded = false" [hidden]="loaded">
+          <img [src]="demande.photoDemande" (load) = "loaded = true" alt="user">
+        </div>
+      </ion-item>
+    </ion-card>
+  </div>
+  <!--Pour le button plus-->
+    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="danger" (click)="ajouterTrajet()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+<!--Mes démandes-->
+<ion-content [fullscreen]="true" *ngIf="selectedTab === 'mesdemandes'">
+  <div id="container">
+    <strong>Mes demandes</strong>
   </div>
 </ion-content>

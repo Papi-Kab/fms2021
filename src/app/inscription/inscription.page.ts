@@ -10,6 +10,8 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { AngularFireStorage } from '@angular/fire/storage';
 import { UtilisateurFirebaseService } from '../@common/services/utilisateur-firebase.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Centre } from '../@common/models/centres';
+import { CentreFirebaseService } from '../@common/services/centre-firebase.service';
 
 @Component({
   selector: 'app-inscription',
@@ -25,6 +27,7 @@ export class InscriptionPage implements OnInit {
   password: string;
   image = '../assets/image/user.png';
   task: any;
+  public centres: Centre[];
   constructor(
     private network: Network,
     public toastController: ToastController,
@@ -35,12 +38,22 @@ export class InscriptionPage implements OnInit {
     public serviceUser: UtilisateurFirebaseService,
     private camera: Camera,
     public asc: ActionSheetController,
+    private serviceCentre: CentreFirebaseService,
   ) { }
 
   ngOnInit() {
+    this.centres = null;
     this.item = new Utilisateur();
     this.buildForm();
     this.fbcollection = this.afFS.collection('utilisateur');
+    this.search();
+  }
+
+  search() {
+    this.serviceCentre.getDocumentById().subscribe(data => {
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      this.centres = <Centre[]>data;
+    });
   }
   buildForm() {
     this.form = this.fb.group({

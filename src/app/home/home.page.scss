@@ -1,3 +1,11 @@
+// @import '../../global.scss';
+// @import "~@angular/material/theming";
+// @use 'sass:map';
+// @use '~@angular/material' as mat;
+// $color-config:    mat.get-color-config($theme);
+// $primary-palette: map.get($color-config, 'primary');
+
+// @import '~@angular/material/theming';
 #container {
   text-align: center;
 
@@ -24,4 +32,76 @@
 
 #container a {
   text-decoration: none;
+}
+ion-segment-button{
+  --background: #3880ff;
+  --color:#ffffff;
+  --background-checked: #3880ff;
+  --color-checked: #ffffff;
+  border: 0px;
+}
+
+.div-box {
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 0 !important;
+    margin: 0px 10px 0px 10px !important;
+}
+
+img {
+    height: 48px;
+    width: 48px;
+
+}
+.demande {
+    height: 65px;
+
+    .value {
+        display: flex;
+        justify-content: left;
+        color: var(--ion-color-medium-tint) !important;
+        font-size: 11px;
+        padding: 2px 0px 2px 0px !important;
+    }
+
+    .time {
+        display: flex;
+        justify-content: left;
+        color: var(--ion-color-medium-tint) !important;
+        font-size: 11px;
+        padding: 2px 0px 2px 0px !important;
+    }
+
+    .label {
+        padding: 10px 0px 2px 0px !important;
+        font-weight: bold;
+        display: flex;
+        justify-content: left;
+        font-size: 13px;
+        color: var(--ion-color-dark) !important;
+
+    }
+
+    .div-box {
+        height: 48px;
+        width: 48px;
+        border-radius: 50%;
+        overflow: hidden;
+        padding: 0 !important;
+        margin: 0px 10px 0px 10px !important;
+    }
+
+    img {
+        height: 48px;
+        width: 48px;
+
+    }
+
+    ion-icon {
+        margin: 0px 10px 0px 10px !important;
+        font-size: 24px;
+    }
+
 }
