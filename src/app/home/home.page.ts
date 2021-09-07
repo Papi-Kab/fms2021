@@ -12,7 +12,7 @@ import { UtilisateurFirebaseService } from '../@common/services/utilisateur-fire
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
+  public search : boolean;
   selectedTab = 'demandes';
   public trajets: Trajet[] = [];
   //email: string;
@@ -49,6 +49,14 @@ export class HomePage {
 
   ajouterTrajet() {
     this.router.navigateByUrl('/home/new-trajet');
+  }
+
+  profil() {
+    this.router.navigateByUrl('/home/profil');
+  }
+
+  showSearchBar(){
+    this.router.navigateByUrl('/home/search');
   }
 
   photoDemande(id: string) {
