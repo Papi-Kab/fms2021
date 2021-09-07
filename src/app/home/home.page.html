@@ -31,21 +31,122 @@
 </ion-segment>
 </ion-header>
 <!--Liste des demandes-->
-<ion-content [fullscreen]="true" *ngIf="selectedTab === 'demandes'">
+<ion-content  [fullscreen]="false" *ngIf="selectedTab === 'demandes'">
   <div id="container">
-    <strong>Liste des demandes</strong>
+    <!-- Le card contenant le trajet en cours -->
+      <ion-card *ngFor="let demande of trajets">
+        <div *ngIf="demande.idDemandeur === idUser || demande.idPreneur === idUser">
+         <!--Demandeur-->
+        <ion-item lines="full" no-padding class="demande" >
+            <div class="div-box" slot="start">
+              <img src="assets/image/user.png" (load) = "loaded = false" [hidden]="loaded">
+              <img [src]="demande.photoDemande" (load) = "loaded = true" alt="user">
+            </div>
+
+          <!-- <div class="buttons_box" slot="end">
+            <ion-icon name="play-circle" color="secondary">
+            </ion-icon>
+        </div> -->
+          <div>
+            <div class="label">{{demande.nomDemandeur | titlecase}}</div>
+              <div class="value">
+                <div>Centre: {{demande.centre}}</div>
+
+              </div>
+            <div class="time"><em>Téléphone: {{demande.telephoneDemandeur}}</em></div>
+          </div>
+        </ion-item>
+        <!--Prenneur-->
+        <ion-item *ngIf="demande.idPreneur !=='NULL'" lines="full" no-padding class="demande" >
+            <div class="div-box" slot="start">
+              <img src="assets/image/user.png" (load) = "loaded = false" [hidden]="loaded">
+              <img [src]="demande.photePreneur" (load) = "loaded = true" alt="user">
+            </div>
+
+          <!-- <div class="buttons_box" slot="end">
+            <ion-icon name="play-circle" color="secondary">
+            </ion-icon>
+        </div> -->
+          <div>
+            <div class="label">{{demande.nomPreneur | titlecase}}</div>
+              <div class="value">
+                <div>Centre: {{demande.centrePreneur}}</div>
+
+              </div>
+            <div class="time"><em>Téléphone: {{demande.telephoneDemandeur}}</em></div>
+          </div>
+        </ion-item>
+        <div class="trajet">
+          <p style="font-size: 15px; color: black;">Trajet</p>
+          <p style="font-size: 15px; color: black;"><em>{{demande.centre}} > </em>  <em>{{demande.domicile}}</em>,  prévue pour <em>{{demande.heureDepart}} </em>.</p>
+        </div>
+        <ion-item *ngIf="demande.idPreneur === 'NULL'" lines="none" no-padding class="actions">
+      <ion-grid>
+         <ion-row>
+           <ion-col style="text-align: center;">
+           <ion-button color="danger" expand="block" (click)="annuler(demande)"><ion-icon name="close-circle-outline"></ion-icon> &nbsp;annuler</ion-button>
+          </ion-col>
+         </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-item *ngIf="demande.idPreneur !== 'NULL'" lines="none" no-padding class="actions">
+      <ion-grid>
+         <ion-row>
+           <ion-col style="text-align: center;">
+           <ion-button color="success" expand="block" (click)="call(demande)"><ion-icon name="call" ></ion-icon> &nbsp; appeler</ion-button>
+          </ion-col>
+           <ion-col  style="text-align: center;">
+           <ion-button color="danger" expand="block" (click)="annuler(demande)"><ion-icon name="close-circle-outline"></ion-icon> &nbsp; annuler</ion-button>
+          </ion-col>
+         </ion-row>
+      </ion-grid>
+    </ion-item>
+        </div>
+      </ion-card>
+    <!-- La fin du card contenant le trajet en cours -->
+    <strong *ngIf="trajets.length === 0">Aucune démande en cours</strong>
     <ion-card *ngFor="let demande of trajets">
-      <ion-item lines="none" no-padding class="demande" >
+       <div *ngIf="demande.idDemandeur !== idUser && demande.idPreneur !== idUser">
+      <ion-item lines="full" no-padding class="demande" >
         <div class="div-box" slot="start">
           <img src="assets/image/user.png" (load) = "loaded = false" [hidden]="loaded">
           <img [src]="demande.photoDemande" (load) = "loaded = true" alt="user">
         </div>
+
+        <!-- <div class="buttons_box" slot="end">
+          <ion-icon name="play-circle" color="secondary">
+          </ion-icon>
+      </div> -->
+      <div>
+        <div class="label">{{demande.nomDemandeur | titlecase}}</div>
+        <div class="value">
+          <div>Centre: {{demande.centreDemandeur}}</div>
+
+        </div>
+        <div class="time"><em>Téléphone: {{demande.telephoneDemandeur}}</em></div>
+      </div>
       </ion-item>
+      <div class="trajet">
+          <p style="font-size: 15px; color: black;">Trajet</p>
+          <p style="font-size: 15px; color: black;"><em>{{demande.centre}} > </em>  <em>{{demande.domicile}}</em>,  prévue pour <em>{{demande.heureDepart}} </em>.</p>
+    </div>
+
+     <ion-item *ngIf="demande.idDemandeur !== idUser && enCours === 0 " lines="none" no-padding class="actions">
+      <ion-grid>
+         <ion-row>
+           <ion-col style="text-align: center;">
+           <ion-button color="success" expand="block" (click)="accept(demande)">accepter</ion-button>
+          </ion-col>
+         </ion-row>
+      </ion-grid>
+    </ion-item>
+    </div>
     </ion-card>
   </div>
   <!--Pour le button plus-->
     <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button color="danger" (click)="ajouterTrajet()">
+    <ion-fab-button color="success" (click)="ajouterTrajet()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
