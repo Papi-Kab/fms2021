@@ -1,11 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
   <ion-buttons slot="secondary">
-    <ion-button>
+    <ion-button (click)="profil()">
       <ion-icon slot="icon-only" name="person-circle"></ion-icon>
     </ion-button>
-    <ion-button>
-      <ion-icon slot="icon-only" name="search"></ion-icon>
+    <ion-button (click)="showSearchBar()">
+      <ion-icon slot="icon-only" name="search" ></ion-icon>
     </ion-button>
   </ion-buttons>
   <ion-buttons slot="primary">
@@ -13,9 +13,9 @@
       <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
     </ion-button>
   </ion-buttons>
+
   <ion-title>Woyo-Woyo</ion-title>
 </ion-toolbar>
-
 <!-- Segment with anchors -->
 <!-- Segment with secondary color -->
 <ion-segment  [(ngModel)]="selectedTab">

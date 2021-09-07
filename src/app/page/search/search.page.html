@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Recherche de trajet </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form id=form [formGroup]="form">
+    <ion-item lines="none">
+      <ion-label position="floating">Centre</ion-label>
+      <!-- <ion-input type= text class="bla" formControlName="centre" placeholder="Centre"></ion-input> -->
+      <ion-select formControlName="centre">
+        <ion-select-option *ngFor="let c of centres" value="{{c.nom}}">{{c.nom}}</ion-select-option>
+      </ion-select>
+      <small class="text-danger" *ngIf="form.controls.centre.touched">
+        <ion-text *ngIf="form.controls.centre.errors?.required" color="danger">
+          <strong>Obligatoire</strong>
+        </ion-text>
+      </small>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="floating">Domicile</ion-label>
+      <ion-input type=text class="bla" formControlName="domicile" placeholder="domicile" [disabled]='true'></ion-input>
+      <small class="text-danger" *ngIf="form.controls.domicile.touched">
+        <ion-text *ngIf="form.controls.domicile.errors?.required" color="danger">
+          <strong>Obligatoire</strong>
+        </ion-text>
+      </small>
+    </ion-item>
+
+    <section>
+      <ion-button [disabled]="!form.valid" color="primary" expand="block" >Créer la demande</ion-button>
+    </section>
+
+  </form>
+
+
+</ion-content>

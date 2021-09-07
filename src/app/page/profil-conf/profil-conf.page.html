@@ -1,9 +1,71 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>profil-conf</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Profil</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <div class="header">
+    <div class="photo-box" >
+      <div class="img-box">
+        <img [src]="image" alt="user"> 
+      </div>
+      <div class="buttons_box" (click)="addPhoto()" *ngIf="statut==1">
+        <div class="icon_box">
+          <ion-icon name="camera"></ion-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form id="form" [formGroup]="form">
+    <ion-item lines="none">
+      <ion-label class="bla" position="">
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-label>
+      <ion-input class="bla" formControlName="nom" placeholder="Nom" [disabled]="statut==0"></ion-input>
+      <small class="text-danger" *ngIf="form.controls.nom.touched">
+        <ion-text *ngIf="form.controls.nom.errors?.required" color="danger">
+          Le nom est <strong>Obligatoire</strong>
+        </ion-text>
+      </small>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="">
+        <ion-icon name="call-outline"></ion-icon>
+      </ion-label>
+      <ion-input formControlName="telephone" placeholder="Téléphone" [disabled]="statut==0"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="">
+        <ion-icon name="mail-outline"></ion-icon>
+      </ion-label>
+      <ion-input formControlName="email" type="Email" placeholder="Email" [disabled]="statut==0"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="">
+        <ion-icon name="home-outline"></ion-icon>
+      </ion-label>
+      <ion-input formControlName="domicile" placeholder="Domicile" [disabled]="statut==0"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="">
+        <ion-icon name="school-outline"></ion-icon>
+      </ion-label>
+      <ion-select formControlName="centre" placeholder="Centre" [disabled]="statut==0">
+        <ion-select-option *ngFor="let c of centres" value="{{c.nom}}">{{c.nom}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+
+
+  </form>
+  <ion-button expand="block" shape="round" *ngIf="statut == 0" (click)="Modify()">Modifier</ion-button>
+  <ion-button class="ion-button2" expand="block" shape="round" *ngIf="statut == 0" color="danger" (click)="logOut()">Deconnexion</ion-button>
+  <ion-button [disabled]="!form.valid" expand="block" (click)="update()" shape="round" *ngIf="statut == 1">Enregistrer</ion-button>
 </ion-content>
+
