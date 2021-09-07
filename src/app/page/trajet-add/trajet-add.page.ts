@@ -40,7 +40,7 @@ export class TrajetAddPage implements OnInit {
 
     //initialisation des éléments qui doivent l'être
     this.traj = new Trajet();
-    this.traj.dateCreation = new Date();
+    this.traj.dateCreation = new Date().getTime()/1000;
     this.traj.statut = 'C';
     this.traj.idPreneur = 'NULL';
     this.initStorage().then(() => {
@@ -52,6 +52,10 @@ export class TrajetAddPage implements OnInit {
           this.traj.domicile = this.item.domicile;
           this.traj.centre = this.item.centre;
           this.traj.photoDemande = this.item.photo;
+          this.traj.nomDemandeur = this.item.nom;
+          this.traj.telephoneDemandeur = this.item.telephone;
+          this.traj.centreDemandeur = this.item.centre;
+          this.traj.id = 'tra' + new Date().getTime() / 1000;
           this.buildForm();
           //console.log(this.item);
         });

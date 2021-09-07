@@ -21,7 +21,13 @@ fbcollection: AngularFirestoreCollection;
   // }
 
   getCours() {
-    const ref = this.afFS.collection('trajets', refe => refe.where('statut', '==', 'C'));
+    const todaystart = new Date();
+    todaystart.setHours(0, 0, 0);
+    const start = todaystart.getTime() / 1000;//recuperation de la date debut
+    const todayend = new Date();
+    todayend.setHours(23, 59, 59);
+    const end = todayend.getTime() / 1000;//recup de la date fin
+    const ref = this.afFS.collection('trajets', refe => refe.where('dateCreation', '<=', end).where('dateCreation', '>=', start));
     return ref.valueChanges();
   }
 
