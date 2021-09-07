@@ -15,7 +15,7 @@ import { UtilisateurFirebaseService } from '../@common/services/utilisateur-fire
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  public search : boolean;
+  public search: boolean;
   selectedTab = 'demandes';
   public trajets: Trajet[] = [];
   temp: Trajet[] = [];
@@ -97,7 +97,7 @@ export class HomePage {
       }
     });
     if (statut === 1 ) {
-      this.cantAdd('Vous avez déjà une damande en cours.');
+      this.cantAdd('Vous avez déjà une demande en cours.');
     }
     else if (statut === 2) {
       this.cantAdd('Vous avez accepter une demande.');
