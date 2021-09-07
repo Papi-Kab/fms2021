@@ -11,6 +11,14 @@ const routes: Routes = [
     path: 'new-trajet',
     loadChildren: () => import('../page/trajet-add/trajet-add.module').then( m => m.TrajetAddPageModule)
   },
+  {
+    path: 'profil',
+    loadChildren: () => import('../page/profil-conf/profil-conf.module').then( m => m.ProfilConfPageModule)
+  },
+  {
+    path: 'search',
+    loadChildren: () => import('../page/search/search.module').then( m => m.SearchPageModule)
+  }
 ];
 
 @NgModule({

@@ -31,6 +31,14 @@ const routes: Routes = [
     path: 'profil-conf',
     loadChildren: () => import('./page/profil-conf/profil-conf.module').then( m => m.ProfilConfPageModule)
   },
+  {
+    path: 'search',
+    loadChildren: () => import('./page/search/search.module').then( m => m.SearchPageModule)
+  },
+  {
+    path: 'trajets',
+    loadChildren: () => import('./page/trajets/trajets.module').then( m => m.TrajetsPageModule)
+  },
 
 
 ];
